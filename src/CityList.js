@@ -14,7 +14,13 @@ class CityList extends Component {
     fetch("https://api.jcdecaux.com/vls/v1/contracts?apiKey=" + this.ApiKey)
       .then((response) => response.json())
       .then((data) => {
-        this.setState({ cities: data });
+        var filtered = [];
+        Object.keys( data ).forEach( function( key ) {
+          if( data[key].country_code === "FR" ) {
+              filtered[key] = data[key];
+          }
+      });
+        this.setState({ cities: filtered });
       })
       .catch((err) => console.error(this.props.url, err.toString()));
   }
@@ -26,7 +32,7 @@ class CityList extends Component {
   render() {
     return (
       <div>
-        {this.state.cities.map((city,i) => (
+        {this.state.cities.map((city,index) => (
           <p>{city.name}</p>
         ))}
       </div>
