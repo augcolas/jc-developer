@@ -31,11 +31,11 @@ class CityList extends Component {
   }
   render() {
     return (
-      <div>
+      <ul>
         {this.state.cities.map((city,index) => (
-          <p>{city.name}</p>
+          <li key={index}>{city.name}</li>
         ))}
-      </div>
+      </ul>
     );
   }
 }
