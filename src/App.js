@@ -1,5 +1,7 @@
 import { Component } from 'react';
 import CityList from './CityList';
+import Header from './Header';
+import 'bootstrap/dist/css/bootstrap.min.css';
 class App extends Component{
     constructor(){
         super()
@@ -7,7 +9,10 @@ class App extends Component{
 
     render(){
         return(
-            <CityList></CityList>
+            <div>
+                <Header></Header>
+                <CityList></CityList>
+            </div>
         )
     }
 }
