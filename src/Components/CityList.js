@@ -1,4 +1,6 @@
 import { Component } from "react";
+
+import City from './City'
 class CityList extends Component {
   ApiKey = "7886a12c53604b2668a08582a04795afcc9375b0";
 
@@ -33,7 +35,7 @@ class CityList extends Component {
     return (
       <ul>
         {this.state.cities.map((city,index) => (
-          <li key={index}>{city.name}</li>
+          <City key={index} city={city}/>
         ))}
       </ul>
     );
