@@ -10,17 +10,17 @@ class Header extends Component {
 
     render() {
         return (
-            <div class="container">
-            <nav class="navbar navbar-expand-lg main-nav px-0">
-            <a class="navbar-brand" href="/#">
+            <div className="container">
+            <nav className="navbar navbar-expand-lg main-nav px-0">
+            <a className="navbar-brand" href="/#">
 					      <img src={image} alt="logo"/>
 					    </a>
-              <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#mainMenu" aria-controls="mainMenu" aria-expanded="false" aria-label="Toggle navigation">
-                              <span class="icon-bar icon-bar-1"></span>
-                              <span class="icon-bar icon-bar-2"></span>
-                              <span class="icon-bar icon-bar-3"></span>
+              <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#mainMenu" aria-controls="mainMenu" aria-expanded="false" aria-label="Toggle navigation">
+                              <span className="icon-bar icon-bar-1"></span>
+                              <span className="icon-bar icon-bar-2"></span>
+                              <span className="icon-bar icon-bar-3"></span>
                           </button>
-              <div class="collapse navbar-collapse" id="mainMenu">
+              <div className="collapse navbar-collapse" id="mainMenu">
                 
                 <CityList/>
                 
