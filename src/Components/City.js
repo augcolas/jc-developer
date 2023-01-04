@@ -7,8 +7,10 @@ export class City extends Component {
   render() {
     console.log(this.props.city)
     return (
-      <li>{this.props.city.name }</li>
-    )
+      <li class="nav-item">
+        <a className="nav-link">{this.props.city.cities[0]}</a>
+      </li>
+    );
   }
 }
 

@@ -1,6 +1,8 @@
 import { Component } from "react";
 
 import City from './City'
+import '../Style/CityList.css';
+
 class CityList extends Component {
   ApiKey = "7886a12c53604b2668a08582a04795afcc9375b0";
 
@@ -33,7 +35,7 @@ class CityList extends Component {
   }
   render() {
     return (
-      <ul>
+      <ul className="navbar-nav ml-auto text-uppercase f1">
         {this.state.cities.map((city,index) => (
           <City key={index} city={city}/>
         ))}

@@ -11,7 +11,6 @@ class App extends Component{
         return(
             <div>
                 <Header></Header>
-                <CityList></CityList>
             </div>
         )
     }

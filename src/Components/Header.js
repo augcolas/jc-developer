@@ -1,5 +1,8 @@
 import { Component } from "react";
 import '../Style/Header.css';
+import CityList from "./CityList";
+import image from '../Resources/logo.png';
+
 class Header extends Component {
     constructor() {
         super();
@@ -7,20 +10,23 @@ class Header extends Component {
 
     render() {
         return (
-            <nav className="navbar navbar-expand-lg bg-light">
-                <div className="container-fluid">
-                    <a className="navbar-brand" href="#">Vélos</a>
-                    <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
-                        <span className="navbar-toggler-icon"></span>
-                    </button>
-                    <div className="collapse navbar-collapse" id="navbarNavAltMarkup">
-                        <div className="navbar-nav">
-                            <a className="nav-link" href="#">Stations</a>
-                            <a className="nav-link" href="#">Contrats</a>
-                        </div>
-                    </div>
-                </div>
+            <div class="container">
+            <nav class="navbar navbar-expand-lg main-nav px-0">
+            <a class="navbar-brand" href="/#">
+					      <img src={image} alt="logo"/>
+					    </a>
+              <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#mainMenu" aria-controls="mainMenu" aria-expanded="false" aria-label="Toggle navigation">
+                              <span class="icon-bar icon-bar-1"></span>
+                              <span class="icon-bar icon-bar-2"></span>
+                              <span class="icon-bar icon-bar-3"></span>
+                          </button>
+              <div class="collapse navbar-collapse" id="mainMenu">
+                
+                <CityList/>
+                
+              </div>
             </nav>
+          </div>
         )
     }
 }
