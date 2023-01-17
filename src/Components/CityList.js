@@ -29,7 +29,7 @@ class CityList extends Component {
       .catch((err) => console.error(this.props.url, err.toString()));
   }
 
-  async componentWillMount() {
+  async componentDidMount() {
     this.getData();
 
   }
