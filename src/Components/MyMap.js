@@ -3,6 +3,9 @@ import { useEffect } from 'react';
 import { MapContainer, TileLayer, Marker,Popup } from "react-leaflet";
 import leaflet from 'leaflet';
 
+import markerIconPng from "leaflet/dist/images/marker-icon.png"
+import {Icon} from 'leaflet'
+
 class MyMap extends React.Component {
   constructor(props) {
     super(props);
@@ -37,7 +40,7 @@ console.log(this.props.stations)
 
 
             {this.props.stations.map(station => (
-              <Marker key={station.number} position={[station.position.lat, station.position.lng]} >
+              <Marker key={station.number} position={[station.position.lat, station.position.lng]} icon={ new Icon({iconUrl: markerIconPng, iconSize: [25, 41], iconAnchor: [12, 41]})} >
                 <Popup><h4>{station.name}</h4><p><b>Adresse :</b> {station.address}</p><p><b>Vélos disponibles</b> : {station.available_bikes}</p><p><b>Places disponibles</b> : {station.available_bike_stands}</p></Popup>
               </Marker>
             ))}
