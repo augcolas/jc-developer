@@ -3,6 +3,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import MyMap from './Components/MyMap';
 import CityList from './Components/CityList';
 
+
 export const MyContext = React.createContext();
 
 class App extends Component {
@@ -17,9 +18,8 @@ class App extends Component {
          fetch(`https://api.jcdecaux.com/vls/v1/stations?contract=${myContract}&apiKey=${this.ApiKey}`)
           .then(response => response.json())
           .then(data => this.setState({ stations: data }));
-
-        
     }
+    
 
           
 
@@ -30,7 +30,7 @@ class App extends Component {
         return (
             <div>
                 <MyContext.Provider value={value}><CityList></CityList> </MyContext.Provider>
-                <MyMap stations={this.state.stations}></MyMap>
+                <MyMap stations={this.state.stations} ></MyMap>
             </div>
         )
     }
