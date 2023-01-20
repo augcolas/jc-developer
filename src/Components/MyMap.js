@@ -1,5 +1,4 @@
-import React, { useState } from "react";
-import { useEffect } from 'react';
+import React, { useRef } from "react";
 import { MapContainer, TileLayer, Marker,Popup } from "react-leaflet";
 import leaflet from 'leaflet';
 
@@ -7,16 +6,17 @@ import markerIconPng from "leaflet/dist/images/marker-icon.png"
 import {Icon} from 'leaflet'
 
 class MyMap extends React.Component {
+
   constructor(props) {
     super(props);
-
+    this.mapRef = React.createRef();
   }
   state = {
     bounds: leaflet.latLngBounds(),
   }
   
   componentDidUpdate(prevProps) {
-    console.log(this.state.bounds)
+
     if (JSON.stringify(prevProps.stations) !== JSON.stringify(this.props.stations)) {
       let newBounds = leaflet.latLngBounds();
       this.props.stations.forEach(marker => newBounds.extend(marker.position));
@@ -24,15 +24,18 @@ class MyMap extends React.Component {
 
     }
 
+    if (this.mapRef.current !== null){
+      this.mapRef.current.flyTo(this.props.stations[0].position, 13)
+
+    }
+
   }
 
   render() {
-
-console.log(this.props.stations)
     return (
       <div>
         {this.props.stations && this.state.bounds._southWest &&
-          <MapContainer className="map-container" bounds={this.state.bounds}>
+          <MapContainer ref={this.mapRef} className="map-container" bounds={this.state.bounds}>
             <TileLayer
               attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
               url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"

@@ -1,7 +1,6 @@
 import { Component } from "react";
 
 import City from './City'
-import '../Style/CityList.css';
 import '../Style/Header.css';
 import image from '../Resources/logo.png';
 

@@ -8,6 +8,10 @@ body {
     z-index: 999;
 }
 
+ul{
+    cursor: pointer;
+}
+
 #mainMenu li>a {
     font-size: 12px;
     letter-spacing: 1px;

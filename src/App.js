@@ -4,6 +4,7 @@ import MyMap from './Components/MyMap';
 import CityList from './Components/CityList';
 import { openDB } from 'idb';
 
+
 export const MyContext = React.createContext();
 
 export const dbPromise = openDB('myDatabase', 1, {
@@ -44,6 +45,7 @@ class App extends Component {
     }
 
     updateContract = (myContract) => {
+
         fetch(`https://api.jcdecaux.com/vls/v1/stations?contract=${myContract}&apiKey=${this.ApiKey}`)
             .then(response => response.json())
             .then(data => {
@@ -58,6 +60,7 @@ class App extends Component {
         const condition = navigator.onLine ? 'online' : 'offline';
         this.setState({ isOnline: condition === 'online' });
     }
+    
 
 
 
@@ -77,7 +80,7 @@ class App extends Component {
         return (
             <div>
                 <MyContext.Provider value={value}><CityList></CityList> </MyContext.Provider>
-                <MyMap stations={this.state.stations}></MyMap>
+                <MyMap stations={this.state.stations} ></MyMap>
             </div>
         )
     }
