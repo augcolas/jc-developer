@@ -8,18 +8,27 @@ export const MyContext = React.createContext();
 
 export const dbPromise = openDB('myDatabase', 1, {
     upgrade(db) {
-        db.createObjectStore('stations', { keyPath: 'id' });
+        db.createObjectStore('stations', { keyPath: 'id', autoIncrement: true });
     },
 });
 
- 
+
 //Fonction pour récupérer des données de la base de données
 export const getData = async () => {
-        const db = await dbPromise;
-        const tx = db.transaction('stations', 'readonly');
-        const store = tx.objectStore('stations');
-        return store.getAll();
-    };
+    const db = await dbPromise;
+    const tx = db.transaction('stations', 'readonly');
+    const store = tx.objectStore('stations');
+    return store.getAll();
+};
+
+//Fonction pour stocker des données dans la base de données
+export const storeData = async (data) => {
+    const db = await dbPromise;
+    const tx = db.transaction('stations', 'readwrite');
+    const store = tx.objectStore('stations');
+    store.put(data);
+    return tx.complete;
+};
 
 class App extends Component {
     ApiKey = "7886a12c53604b2668a08582a04795afcc9375b0";
@@ -27,19 +36,6 @@ class App extends Component {
         stations: [],
         isOnline: true,
     }
-
-
-
-    //Fonction pour stocker des données dans la base de données
-    storeData = async (data) => {
-        const db = await dbPromise;
-        const tx = db.transaction('stations', 'readwrite');
-        const store = tx.objectStore('stations');
-        store.put(data);
-        return tx.complete;
-    };
-
-
 
     componentDidMount() {
         //Détection de la connexion internet
@@ -52,7 +48,7 @@ class App extends Component {
             .then(response => response.json())
             .then(data => {
                 this.setState({ stations: data });
-                this.storeData(data)
+                storeData(data)
             });
 
 
@@ -61,23 +57,23 @@ class App extends Component {
     handleConnectionChange = () => {
         const condition = navigator.onLine ? 'online' : 'offline';
         this.setState({ isOnline: condition === 'online' });
-        if (!this.state.isOnline) {
-            //Récupération des données hors ligne
-            this.getDataFromIndexedDB();
-        }
-    }
-
-    getDataFromIndexedDB = async () => {
-        const data = await getData();
-        this.setState({ data });
     }
 
 
 
     render() {
-        const value = {
-            updateContract: this.updateContract
-        };
+        var value;
+        if (this.state.isOnline) {
+            value = {
+                updateContract: this.updateContract
+            };
+        }
+        else {
+            value = getData();
+            //can't find how to await an async method in render()
+            console.log(value)
+        }
+
         return (
             <div>
                 <MyContext.Provider value={value}><CityList></CityList> </MyContext.Provider>
